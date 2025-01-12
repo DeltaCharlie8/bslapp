@@ -2,6 +2,12 @@
   "expo": {
     "name": "bslapp",
     "slug": "bslapp",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "2333df8e-e46e-4f50-baeb-b9929bbae56a"
+      }
+    },
+    "owner": "delta_charlie"
   }
 }
