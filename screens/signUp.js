@@ -1,24 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
 
 const signUp = () => {
   return (
       // This is the launch screen when starting the app
-      <NavigationContainer>
-        <View style={styles.container}>
-          <StatusBar style="auto" />
-          <Text>Create a Profile!</Text>
-          <TextInput value={text} placeholder='Name'/>
-          <TextInput value={text} placeholder='Surname'/>
-          <TextInput value={text} placeholder='Username'/>
-          <TextInput value={text} placeholder='Email'/>
-          <TextInput value={text} placeholder='Password'/>
-          <Button title = "Submit" />
-          <Button title = "Cancel" />
-        </View>
-      </NavigationContainer>
+    <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Text>Create a Profile!</Text>
+        <TextInput placeholder='Name'/>
+        <TextInput placeholder='Surname'/>
+        <TextInput placeholder='Username'/>
+        <TextInput placeholder='Email'/>
+        <TextInput placeholder='Password' secureTextEntry/>
+        <Button title = "Submit" />
+        <Button title = "Cancel" />
+    </View>
   );
 };
 
