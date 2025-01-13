@@ -10,7 +10,7 @@ const signUp = ({ navigation }) => {
     const [email, newEmail] = React.useState("Enter your Email");
     const [password, newPassword] = React.useState("Enter your Password");
   return (
-      // This is the launch screen when starting the app
+      
     <View style={styles.container}>
         <StatusBar style="auto" />
         <Text>Create a Profile!</Text>
@@ -19,7 +19,10 @@ const signUp = ({ navigation }) => {
         <TextInput value={username} style={styles.input} onChangeText={newUsername}/>
         <TextInput value={email} style={styles.input} onChangeText={newEmail}/>
         <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
-        <Button title = "Submit" />
+        <Button 
+            title = "Submit" 
+            onPress={() => navigation.navigate("homepage")}
+        />
         <Button 
             title = "Cancel" 
             onPress={() => navigation.goBack()}

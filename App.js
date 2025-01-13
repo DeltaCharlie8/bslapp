@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import signUp from './screens/signUp';
+import homepage from './screens/homepage';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,10 @@ const launchScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('signUp')}
       />
       <Button title="Log In" />
-      <Button title="Continue as Guest" />
+      <Button 
+        title="Continue as Guest" 
+        onPress={() => navigation.navigate('homepage')}
+        />
     </View>
   );
 };
@@ -34,6 +38,10 @@ const App = () => {
         <Stack.Screen 
           name="signUp" 
           component={signUp} 
+        />
+        <Stack.Screen 
+          name="homepage" 
+          component={homepage} 
         />
       </Stack.Navigator>
     </NavigationContainer>
