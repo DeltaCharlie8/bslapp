@@ -2,22 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
-
-const signUp = ({ navigation }) => {
-    const [name, newName] = React.useState("Enter your Name");
-    const [surname, newSurname] = React.useState("Enter your Surname");
+const login = ({navigation}) => {
     const [username, newUsername] = React.useState("Enter your Username");
-    const [email, newEmail] = React.useState("Enter your Email");
     const [password, newPassword] = React.useState("Password");
     return (
-        
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <Text>Create a Profile!</Text>
-            <TextInput value={name} style={styles.input} onChangeText={newName}/>
-            <TextInput value={surname} style={styles.input} onChangeText={newSurname}/>
+            <Text>Log into your Profile!</Text>
             <TextInput value={username} style={styles.input} onChangeText={newUsername}/>
-            <TextInput value={email} style={styles.input} onChangeText={newEmail}/>
             <Text>Enter your password</Text>
             <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
             <Button 
@@ -47,4 +39,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default signUp
+export default login

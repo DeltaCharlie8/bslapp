@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 const homepage = ({navigation}) => {
     return (
@@ -8,7 +8,10 @@ const homepage = ({navigation}) => {
             <StatusBar style="auto" />
             <Button title = "BSL Library" />
             <Button title = "Quizzes" />
-            <Button title = "Profile" />
+            <Button 
+              title = "Profile" 
+              onPress={() => navigation.navigate("profile")}
+            />
             <Button title = "Settings" />
             <Button 
                 title = "Logout" 
