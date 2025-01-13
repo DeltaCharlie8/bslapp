@@ -3,19 +3,27 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 
-const signUp = () => {
+const signUp = ({ navigation }) => {
+    const [name, newName] = React.useState("Enter your Name");
+    const [surname, newSurname] = React.useState("Enter your Surname");
+    const [username, newUsername] = React.useState("Enter your Username");
+    const [email, newEmail] = React.useState("Enter your Email");
+    const [password, newPassword] = React.useState("Enter your Password");
   return (
       // This is the launch screen when starting the app
     <View style={styles.container}>
         <StatusBar style="auto" />
         <Text>Create a Profile!</Text>
-        <TextInput placeholder='Name'/>
-        <TextInput placeholder='Surname'/>
-        <TextInput placeholder='Username'/>
-        <TextInput placeholder='Email'/>
-        <TextInput placeholder='Password' secureTextEntry/>
+        <TextInput value={name} style={styles.input} onChangeText={newName}/>
+        <TextInput value={surname} style={styles.input} onChangeText={newSurname}/>
+        <TextInput value={username} style={styles.input} onChangeText={newUsername}/>
+        <TextInput value={email} style={styles.input} onChangeText={newEmail}/>
+        <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
         <Button title = "Submit" />
-        <Button title = "Cancel" />
+        <Button 
+            title = "Cancel" 
+            onPress={() => navigation.goBack()}
+        />
     </View>
   );
 };

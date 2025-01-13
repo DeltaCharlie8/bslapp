@@ -26,7 +26,7 @@ const launchScreen = ({ navigation }) => {
 const App = () => {
   return (
       <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen 
           name="launchScreen" 
           component={launchScreen} 
@@ -39,8 +39,6 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
