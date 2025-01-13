@@ -15,7 +15,7 @@ const homepage = ({navigation}) => {
             <Button title = "Settings" />
             <Button 
                 title = "Logout" 
-                onPress={() => navigation.goBack()}
+                onPress={() => navigation.navigate("launchScreen")}
             />
         </View>
     );
