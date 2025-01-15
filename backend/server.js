@@ -2,7 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
+const routes = require('./routes');
+
 
 // Load environment variables
 //dotenv.config(); // can delete this once checked
