@@ -4,24 +4,21 @@ import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import {addUser} from '../api';
 
 const SignUp = ({ navigation }) => {
-    const [name, newName] = React.useState("Enter your Name");
-    const [surname, newSurname] = React.useState("Enter your Surname");
-    const [username, newUsername] = React.useState("Enter your Username");
-    const [email, newEmail] = React.useState("Enter your Email");
-    const [password, newPassword] = React.useState("Password");
+    const [name, newName] = React.useState("");
+    const [surname, newSurname] = React.useState("");
+    const [username, newUsername] = React.useState("");
+    const [email, newEmail] = React.useState("");
+    const [password, newPassword] = React.useState("");
 
       //API for sign up
       const handleSignUp = async () => {
         try {
             await addUser({
-                name,
-                surname,
-                username,
-                email,
-                password,
+                name, surname, username, email, password,
             });
             Alert.alert('User added!');
-            navigation.navigate('homepage'); // Redirect after successful sign-up
+            // Redirect after sign-up complete
+            navigation.navigate('homepage');
         } catch (error) {
             console.error('Error during sign-up:', error);
             Alert.alert('Error: ', error.message);
@@ -31,12 +28,17 @@ const SignUp = ({ navigation }) => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Text>Create a Profile!</Text>
-            <TextInput value={name} style={styles.input} onChangeText={newName}/>
-            <TextInput value={surname} style={styles.input} onChangeText={newSurname}/>
-            <TextInput value={username} style={styles.input} onChangeText={newUsername}/>
-            <TextInput value={email} style={styles.input} onChangeText={newEmail}/>
+            <Text></Text>
+            <Text>Enter your name</Text>
+            <TextInput value={name} style={styles.input} onChangeText={newName} placeholder="Name"/>
+            <Text>Enter your surname</Text>
+            <TextInput value={surname} style={styles.input} onChangeText={newSurname} placeholder="Surname"/>
+            <Text>Enter your username</Text>
+            <TextInput value={username} style={styles.input} onChangeText={newUsername} placeholder="Username"/>
+            <Text>Enter your email</Text>
+            <TextInput value={email} style={styles.input} onChangeText={newEmail} placeholder="Email"/>
             <Text>Enter your password</Text>
-            <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
+            <TextInput value={password} style={styles.input} onChangeText={newPassword} placeholder="Password" secureTextEntry/>
             <Button 
                 title = "Submit" 
                 onPress={handleSignUp}
@@ -52,7 +54,7 @@ const SignUp = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
   },

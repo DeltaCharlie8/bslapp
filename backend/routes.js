@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
     res.send('Simple Signs Backend is running!');
 });
 
-// Add a new user and hash the paswword
+// Add a new user and hash the password
 const saltRounds = 10;
 router.post('/users', (req, res) => {
     const {name, surname, username, email, password} = req.body;
@@ -46,9 +46,6 @@ router.post('/users', (req, res) => {
                 console.error('Error hashing password:', err);
                 return res.status(500).json({error: 'Error hashing password'});
             }
-            // Generate hashed password
-            console.log('Hashes password is: ', hash);
-
             // Query to add user to database
             const sql = 'INSERT INTO Users (name, surname, username, email, password) VALUES (?, ?, ?, ?, ?)';
             db.query(sql, [name, surname, username, email, hash], (err, results) => {

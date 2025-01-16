@@ -15,14 +15,3 @@ export const addUser = async (userData) => {
         throw error;
     }
 };
-
-// // Get all items from BSL_Library     DELETE ONCE CHECKED
-// export const getBSLLibrary = async () => {
-//     try {
-//         const response = await axios.get(`${API_URL}/bsl_library`);
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error fetching BSL library:', error);
-//         throw error;
-//     }
-// };
