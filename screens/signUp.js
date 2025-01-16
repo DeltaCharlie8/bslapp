@@ -3,7 +3,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 
-const signUp = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
     const [name, newName] = React.useState("Enter your Name");
     const [surname, newSurname] = React.useState("Enter your Surname");
     const [username, newUsername] = React.useState("Enter your Username");
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default signUp
+export default SignUp

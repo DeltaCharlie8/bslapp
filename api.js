@@ -1,3 +1,4 @@
+//This folder contains functions that connect the frontend and backend.
 import axios from 'axios';
 
 // Base URL of the backend

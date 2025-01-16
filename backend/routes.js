@@ -1,16 +1,18 @@
+//This folder is for handling database queries and API responses.
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2');
+const dotenv = require('dotenv');
 
 // MySQL connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'appuser',
-    password: 'app2027',
-    database: 'simplesigns',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
 });
 
-// Middleware to ensure database connection
+// Connect to the database
 db.connect((err) => {
     if (err) {
         console.error('Database connection failed:', err.stack);
@@ -24,7 +26,7 @@ router.get('/', (req, res) => {
     res.send('Simple Signs Backend is running!');
 });
 
-// Insert new user
+// Add a new user
 router.post('/users', (req, res) => {
     const { name, surname, username, email, password } = req.body;
     const sql = 'INSERT INTO Users (name, surname, username, email, password) VALUES (?, ?, ?, ?, ?)';
@@ -36,15 +38,13 @@ router.post('/users', (req, res) => {
     });
 });
 
-// Fetch all BSL library items
-router.get('/bsl_library', (req, res) => {
-    const sql = 'SELECT * FROM BSL_Library';
-    db.query(sql, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.json(results);
-    });
-});
+// Log into your profile
+
+// View your profile
+
+// Change your profile details
+
+// Get BSL video
+
 
 module.exports = router;

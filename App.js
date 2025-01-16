@@ -5,15 +5,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //import screens
-import signUp from './screens/signUp';
-import homepage from './screens/homepage';
-import login from './screens/login';
-import profile from './screens/profile';
+import SignUp from './screens/signUp';
+import Homepage from './screens/homepage';
+import Login from './screens/login';
+import Profile from './screens/profile';
 
 const Stack = createNativeStackNavigator();
 
 // This is the launch screen when starting the app
-const launchScreen = ({ navigation }) => {
+const LaunchScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -34,29 +34,30 @@ const launchScreen = ({ navigation }) => {
   );
 };
 
+//these screens are stacked within the app
 const App = () => {
   return (
       <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen 
           name="launchScreen" 
-          component={launchScreen} 
+          component={LaunchScreen} 
         />
         <Stack.Screen 
           name="signUp" 
-          component={signUp} 
+          component={SignUp} 
         />
         <Stack.Screen 
           name="homepage" 
-          component={homepage} 
+          component={Homepage} 
         />
         <Stack.Screen 
           name="login" 
-          component={login} 
+          component={Login} 
         />
         <Stack.Screen 
           name="profile" 
-          component={profile} 
+          component={Profile} 
         />
       </Stack.Navigator>
     </NavigationContainer>

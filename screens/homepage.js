@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-const homepage = ({navigation}) => {
+const Homepage = ({navigation}) => {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default homepage
+export default Homepage

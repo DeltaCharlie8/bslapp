@@ -4,10 +4,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 
-
-// Load environment variables
-//dotenv.config(); // can delete this once checked
-
 const app = express();
 const port = 5000;
 
@@ -15,10 +11,6 @@ const port = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Routes
-// app.get('/', (req, res) => {
-//     res.send('Simple Signs Backend is running!'); CAN DELETE ONCE CHECKED
-// });
 //use the route.js
 app.use('/', routes);
 
