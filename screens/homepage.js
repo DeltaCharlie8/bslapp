@@ -7,7 +7,7 @@ const Homepage = ({navigation}) => {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Button title = "BSL Library" />
-            <Button title = "Quizzes" />
+            {/*<Button title = "Quizzes" />*/ /*this will be active once MVPs are met*/} 
             <Button 
               title = "Profile" 
               onPress={() => navigation.navigate("profile")}

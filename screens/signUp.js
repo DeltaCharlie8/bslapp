@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-
+import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import {addUser} from '../api';
 
 const SignUp = ({ navigation }) => {
     const [name, newName] = React.useState("Enter your Name");
@@ -9,8 +9,25 @@ const SignUp = ({ navigation }) => {
     const [username, newUsername] = React.useState("Enter your Username");
     const [email, newEmail] = React.useState("Enter your Email");
     const [password, newPassword] = React.useState("Password");
+
+      //API for sign up
+      const handleSignUp = async () => {
+        try {
+            await addUser({
+                name,
+                surname,
+                username,
+                email,
+                password,
+            });
+            Alert.alert('User added!');
+            navigation.navigate('homepage'); // Redirect after successful sign-up
+        } catch (error) {
+            console.error('Error during sign-up:', error);
+            Alert.alert('Error: ', error.message);
+        }
+      };
     return (
-        
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Text>Create a Profile!</Text>
@@ -22,7 +39,7 @@ const SignUp = ({ navigation }) => {
             <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
             <Button 
                 title = "Submit" 
-                onPress={() => navigation.navigate("homepage")}
+                onPress={handleSignUp}
             />
             <Button 
                 title = "Cancel" 
