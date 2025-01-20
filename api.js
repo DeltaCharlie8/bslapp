@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 // API URL of the backend
-const API_URL = 'http://192.168.1.83:5000'; 
+const API_URL = 'http://192.168.1.83:5000'; //this needs changing according to location, also change on the server.
 
 // Add a new user
 export const addUser = async (userData) => {

@@ -16,7 +16,7 @@ const SignUp = ({ navigation }) => {
             await addUser({
                 name, surname, username, email, password,
             });
-            Alert.alert('User added!');
+            Alert.alert(name + ' has been added!');
             // Redirect after sign-up complete
             navigation.navigate('homepage');
         } catch (error) {

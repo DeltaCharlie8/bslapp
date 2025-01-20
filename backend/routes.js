@@ -54,7 +54,6 @@ router.post('/users', (req, res) => {
                     return res.status(500).json({ error: 'Error inserting user into the database' });
                 }
                 res.json({ message: 'User added successfully!', userId: results.insertId });
-                console.log('User added successfully!')
             });
         });
     });
