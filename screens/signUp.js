@@ -13,9 +13,7 @@ const SignUp = ({ navigation }) => {
       //API for sign up
       const handleSignUp = async () => {
         try {
-            await addUser({
-                name, surname, username, email, password,
-            });
+            await addUser({name, surname, username, email, password,});
             Alert.alert(name + ' has been added!');
             // Redirect after sign-up complete
             navigation.navigate('homepage');

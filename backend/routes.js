@@ -60,12 +60,43 @@ router.post('/users', (req, res) => {
 });
 
 // Log into your profile (query to check credentials)
+router.post('/login', (req, res) => {
+    const {username, password} = req.body;
+    // Query to find the username in the database
+    const sql = 'SELECT password FROM users WHERE username = ?'
+    db.query(sql, [username], (err, results) => {
+        if (err) {
+            console.error('Query error', err);
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        // Check if username exists
+        if (results.length === 0) {
+            return res.status(401).json({ error: 'Invalid username or password' })
+        }   
+        // if user exists, check if hashed passwords match
+        const savedPassword = results[0].password;
+        bcrypt.compare(password, savedPassword, (err, isMatch) => {
+            if (err) {
+                console.error('Password error: ', err);
+                return res.status(500).json({ error: 'Password comparison error' });
+            }
+            if (isMatch) {
+                res.json({ error: 'User logged in!'});
+            }else {
+                return res.status(401).json({ error: 'Invalid username or password, please try again' });
+            }
+        });
+    });
+});
 
 // View your profile (query to retrieve details)
+//router.post('', (req, res) => {});
 
 // Change your profile details (query to update information)
+//router.post('', (req, res) => {});
 
 // Get BSL video (query to retrieve video)
+//router.post('', (req, res) => {});
 
 
 module.exports = router;

@@ -1,20 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import { loginUser } from '../api';
 
 const Login = ({navigation}) => {
-    const [username, newUsername] = React.useState("Enter your Username");
-    const [password, newPassword] = React.useState("Password");
+    const [username, newUsername] = React.useState("");
+    const [password, newPassword] = React.useState("");
+
+      //API for login
+      const handleLogin = async () => {
+        // If submit is pressed with no details entered
+        if (!username || !password) {
+          Alert.alert('Please enter a username and password')
+        }
+        try {
+            await loginUser({ username, password,});
+            Alert.alert('Welcome back ' + username + '!');
+            // Redirect after log in complete
+            navigation.navigate('homepage');
+        } catch (error) {
+            console.error('Error during login:', error);
+            Alert.alert('Error: ', error.message);
+        }
+      };
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
             <Text>Log into your Profile!</Text>
-            <TextInput value={username} style={styles.input} onChangeText={newUsername}/>
+            <TextInput value={username} style={styles.input} onChangeText={newUsername} placeholder="Username"/>
             <Text>Enter your password</Text>
-            <TextInput value={password} style={styles.input} onChangeText={newPassword} secureTextEntry/>
+            <TextInput value={password} style={styles.input} onChangeText={newPassword} placeholder="Password" secureTextEntry/>
             <Button 
                 title = "Submit" 
-                onPress={() => navigation.navigate("homepage")}
+                onPress={handleLogin}
             />
             <Button 
                 title = "Cancel" 

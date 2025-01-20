@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 const Homepage = ({navigation}) => {
     return (
@@ -15,7 +15,10 @@ const Homepage = ({navigation}) => {
             <Button title = "Settings" />
             <Button 
                 title = "Logout" 
-                onPress={() => navigation.navigate("launchScreen")}
+                onPress={() => {
+                  Alert.alert('You have been logged out'); 
+                  navigation.navigate("launchScreen");
+                }}
             />
         </View>
     );
