@@ -9,6 +9,7 @@ import SignUp from './screens/signUp';
 import Homepage from './screens/homepage';
 import Login from './screens/login';
 import Profile from './screens/profile';
+import Library from './screens/library'
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,10 @@ const App = () => {
         <Stack.Screen 
           name="login" 
           component={Login} 
+        />
+        <Stack.Screen 
+          name="library" 
+          component={Library} 
         />
         <Stack.Screen 
           name="profile" 
