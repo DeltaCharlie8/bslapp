@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, Button, TextInput, Alert } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import { loginUser } from '../api';
 
 const Login = ({navigation}) => {
@@ -24,7 +25,7 @@ const Login = ({navigation}) => {
         }
       };
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
             <Text>Log into your Profile!</Text>
             <TextInput value={username} style={styles.input} onChangeText={newUsername} placeholder="Username"/>
@@ -38,7 +39,7 @@ const Login = ({navigation}) => {
                 title = "Cancel" 
                 onPress={() => navigation.goBack()}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

@@ -1,23 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, View, Button, Alert, Text } from 'react-native';
+import { StyleSheet, Button, Alert, Text } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Library = ({navigation}) => {
     return (
-        <View style={styles.container}>
-            <Text>Choose a topic</Text>
+        <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
+            <Text>Choose a topic</Text>
             <Button title = "Letters" 
-                onPress={() => {Alert.alert('Letters has been pressed')}}/>
+                onPress={() => navigation.navigate('letters')}/>
             <Button title = "Numbers" 
-                onPress={() => {Alert.alert('Numbers has been pressed')}}/>
+                onPress={() => navigation.navigate('numbers')}/>
+            <Button title = "Home" 
+                onPress={() => navigation.navigate('homepage')}/>
             <Button title = "Logout" 
                 onPress={() => {
                     Alert.alert('You have been logged out'); 
                     navigation.navigate("launchScreen");
                 }}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

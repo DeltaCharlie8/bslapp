@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, Button } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -9,14 +10,16 @@ import SignUp from './screens/signUp';
 import Homepage from './screens/homepage';
 import Login from './screens/login';
 import Profile from './screens/profile';
-import Library from './screens/library'
+import Library from './screens/library';
+import Letters from './screens/letters';
+import Numbers from './screens/numbers';
 
 const Stack = createNativeStackNavigator();
 
 // This is the launch screen when starting the app
 const LaunchScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <Text>Welcome to Simple Signs!</Text>
       <Button 
@@ -31,7 +34,7 @@ const LaunchScreen = ({ navigation }) => {
         title="Continue as Guest" 
         onPress={() => navigation.navigate('homepage')}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -63,6 +66,14 @@ const App = () => {
         <Stack.Screen 
           name="profile" 
           component={Profile} 
+        />
+        <Stack.Screen 
+          name="letters" 
+          component={Letters} 
+        />
+        <Stack.Screen 
+          name="numbers" 
+          component={Numbers} 
         />
       </Stack.Navigator>
     </NavigationContainer>

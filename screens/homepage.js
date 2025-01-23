@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, View, Button, Alert } from 'react-native';
+import { StyleSheet, SafeAreaView, Button, Alert } from 'react-native';
 
 const Homepage = ({navigation}) => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
             <Button title = "BSL Library" 
               onPress={() => navigation.navigate("library")}
@@ -20,7 +20,7 @@ const Homepage = ({navigation}) => {
                   navigation.navigate("launchScreen");
                 }}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

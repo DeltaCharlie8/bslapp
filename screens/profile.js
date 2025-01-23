@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, Button, TextInput } from 'react-native';
 
 const Profile = ({navigation}) => {
     const [name, newName] = React.useState("Enter your Name");
@@ -9,7 +9,7 @@ const Profile = ({navigation}) => {
     const [email, newEmail] = React.useState("Enter your Email");
     const [password, newPassword] = React.useState("Password");
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
             <Text>This is your profile page</Text>
             <TextInput value={name} style={styles.input} onChangeText={newName}/>
@@ -25,7 +25,7 @@ const Profile = ({navigation}) => {
                 title = "Cancel" 
                 onPress={() => navigation.goBack()}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

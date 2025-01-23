@@ -59,7 +59,7 @@ router.post('/users', (req, res) => {
     });
 });
 
-// Log into your profile (query to check credentials)
+// Log into your profile
 router.post('/login', (req, res) => {
     const {username, password} = req.body;
     // Query to find the username in the database
@@ -95,8 +95,24 @@ router.post('/login', (req, res) => {
 // Change your profile details (query to update information)
 //router.post('', (req, res) => {});
 
-// Get BSL video (query to retrieve video)
-//router.post('', (req, res) => {});
-
+// Get BSL video
+router.get('/videos', (req, res) => {
+    console.log('connected to router');
+    const { title } = req.query;
+    // Query to get URL from database
+    //const sql = 'SELECT VideoURL FROM BSL_Library WHERE Title = ?';
+    const sql = 'SELECT VideoURL FROM BSL_Library WHERE LOWER(Title) = LOWER(?)';
+    db.query(sql, [title], (err, results) => {
+        if (err) {
+            console.error('Database query error:', err);
+            res.status(500).json({ message: 'Database query error' });
+        } else if (results.length > 0) {
+            res.json({ VideoURL: results[0].VideoURL }); // Return the first matching result
+        } else {
+            console.log('No video found for title:', title);
+            res.status(404).json({ message: 'Video not found' });
+        }
+    });
+});
 
 module.exports = router;
