@@ -10,7 +10,7 @@ const Letters = () => {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     const [videoURL, setVideoURL] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [videoStatus, setVideoStatus] = useState({}); // To track the video status
+    const [videoStatus, setVideoStatus] = useState({});
     const navigation = useNavigation();
 
     // API for videos
@@ -18,7 +18,7 @@ const Letters = () => {
         const url = await findVideo(letter); // finds the URL of the video
         if (url) {
             setVideoURL(url); // this will update the URL to the current letter pressed
-            openVideoModal();
+            openVideoModal(); // this will play the video
             console.log(`'Video found for ${letter}: `, url);
         } else {
             setVideoURL(url);
@@ -41,31 +41,12 @@ const Letters = () => {
                         navigation.navigate("launchScreen");
                     }} />
                 <Button 
-                    title = "Return" 
-                    onPress={() => navigation.goBack()}
+                    title = "Return" onPress={() => navigation.goBack()}
                 />
                 {alphabet.map((letter, index) => (
-                    <Button title={letter} key={index} onPress={() => handleVideo(letter)} />
+                    <Button title={letter} key={index} onPress={() => handleVideo(letter)} /> // creates buttons for each letter
                 ))}
 
-                {/* Show the video if a URL is available */}
-                {videoURL && (
-                    <View style={styles.videoContainer}>
-                        <Video 
-                            source={{ uri: videoURL }}
-                            style={styles.videoPlayer}
-                            shouldPlay={true}  // Ensure video starts playing when loaded
-                            resizeMode="contain"
-                            onError={(e) => console.error('Video error: ', e)}
-                            onLoad={() => console.log('Video loaded successfully')}
-                            onPlaybackStatusUpdate={(status) => setVideoStatus(status)}  // Track video status
-                        />
-                    </View>
-                )}
-
-                <Button title="Video" onPress={openVideoModal} /> {/* Video button */}
-
-                {/* Video Modal */}
                 <Modal
                     visible={modalVisible}
                     animationType="slide"
@@ -74,16 +55,15 @@ const Letters = () => {
                 >
                     <View style={styles.modalBackground}>
                         <View style={styles.modalContainer}>
-                            {/* Wrapping "Playing Video" in Text component */}
                             <Text>Playing Video</Text>
                             <Video
-                                source={{ uri: videoURL || 'https://media.signbsl.com/videos/bsl/signstation/c.mp4' }} // Default URL if no video is found
+                                source={{ uri: videoURL  }}
                                 style={styles.videoPlayer}
                                 controls={true}
                                 shouldPlay={true}
                                 resizeMode="contain"
                                 onError={(e) => console.error('Video error: ', e)}
-                                onPlaybackStatusUpdate={(status) => setVideoStatus(status)}  // Track video status
+                                onPlaybackStatusUpdate={(status) => setVideoStatus(status)}  
                             />
                             <Button title="Close Video" onPress={closeVideoModal} />
                         </View>
@@ -97,17 +77,11 @@ const Letters = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20, // Add padding to avoid any overlap with the status bar
+    paddingTop: 20, 
   },
   scrollContainer: {
     alignItems: 'center', // Center the buttons
-    padding: 10, // Add some padding around the buttons
-  },
-  videoContainer: {
-    marginTop: 20,
-    padding: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#ddd',
+    padding: 10, 
   },
   videoPlayer: {
     width: '100%',
@@ -117,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Transparent background for modal
+    backgroundColor: 'rgba(0, 0, 0, 0.7)', 
   },
   modalContainer: {
     width: '80%',

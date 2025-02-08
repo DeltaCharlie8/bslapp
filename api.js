@@ -26,7 +26,7 @@ export const loginUser = async (userData) => {
     }
 };
 
-// BSL Video
+// BSL Letters Video
 export const findVideo = async (letter) => {
     try {
         const response = await axios.get(`${API_URL}/videos/${letter}`);
@@ -35,6 +35,23 @@ export const findVideo = async (letter) => {
             return response.data.VideoURL;
         } else {
             console.error(`No video found for ${letter}`);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error finding video:", error.response ? error.response.data : error.message);
+        return null;
+    }
+};
+
+// BSL Numbers Video
+export const findNumbers = async (number) => {
+    try {
+        const response = await axios.get(`${API_URL}/numbers/${number}`);
+
+        if (response.data && response.data.VideoURL) {
+            return response.data.VideoURL;
+        } else {
+            console.error(`No video found for ${number}`);
             return null;
         }
     } catch (error) {

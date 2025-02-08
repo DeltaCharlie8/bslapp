@@ -95,28 +95,7 @@ router.post('/login', (req, res) => {
 // Change your profile details (query to update information)
 //router.post('', (req, res) => {});
 
-// Get BSL video
-// router.get('/videos', (req, res) => {
-//     console.log('connected to router');
-//     const { title } = req.query;
-//     // if URL exists, save URL
-//     const savedURL = results[0].password;
-//     // Query to get URL from database
-//     //const sql = 'SELECT VideoURL FROM BSL_Library WHERE Title = ?';
-//     const sql = `SELECT VideoURL FROM BSL_Library WHERE Title = ${title}`;
-//     db.query(sql, [title], (err, results) => {
-//         if (err) {
-//             console.error('Database query error:', err);
-//             res.status(500).json({ message: 'Database query error' });
-//         } else if (results.length > 0) {
-//             res.json({ VideoURL: results[0].VideoURL }); // Return the first matching result
-//         } else {
-//             console.log('No video found for title:', title); // Log when no result is found
-//             res.status(404).json({ message: 'Video not found' });
-//         }
-//     });
-// });
-
+// Get BSL Letters video
 router.get('/videos/:letter', async (req, res) => {
     const letter = req.params.letter;
     try {
@@ -125,6 +104,22 @@ router.get('/videos/:letter', async (req, res) => {
             res.json({ VideoURL: rows[0].VideoURL });
         } else {
             res.status(404).json({ error: "No video found" + letter });
+        }
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+// Get BSL Numbers video
+router.get('/numbers/:number', async (req, res) => {
+    const number = req.params.number;
+    try {
+        const [rows] = await db.promise().query("SELECT VideoURL FROM BSL_Library WHERE Title = ?", [number.toString()]);
+        if (rows.length > 0) {
+            res.json({ VideoURL: rows[0].VideoURL });
+        } else {
+            res.status(404).json({ error: "No video found for number: " + number });
         }
     } catch (error) {
         console.error("Database error:", error);
