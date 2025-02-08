@@ -8,6 +8,9 @@
         "projectId": "2333df8e-e46e-4f50-baeb-b9929bbae56a"
       }
     },
-    "owner": "delta_charlie"
+    "owner": "delta_charlie",
+    "plugins": [
+      "expo-video"
+    ]
   }
 }

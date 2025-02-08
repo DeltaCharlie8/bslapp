@@ -96,25 +96,40 @@ router.post('/login', (req, res) => {
 //router.post('', (req, res) => {});
 
 // Get BSL video
-router.get('/videos', (req, res) => {
-    console.log('connected to router');
-    const { title } = req.query;
-    // if URL exists, save URL
-    const savedURL = results[0].password;
-    // Query to get URL from database
-    //const sql = 'SELECT VideoURL FROM BSL_Library WHERE Title = ?';
-    const sql = `SELECT VideoURL FROM BSL_Library WHERE Title = ${title}`;
-    db.query(sql, [title], (err, results) => {
-        if (err) {
-            console.error('Database query error:', err);
-            res.status(500).json({ message: 'Database query error' });
-        } else if (results.length > 0) {
-            res.json({ VideoURL: results[0].VideoURL }); // Return the first matching result
+// router.get('/videos', (req, res) => {
+//     console.log('connected to router');
+//     const { title } = req.query;
+//     // if URL exists, save URL
+//     const savedURL = results[0].password;
+//     // Query to get URL from database
+//     //const sql = 'SELECT VideoURL FROM BSL_Library WHERE Title = ?';
+//     const sql = `SELECT VideoURL FROM BSL_Library WHERE Title = ${title}`;
+//     db.query(sql, [title], (err, results) => {
+//         if (err) {
+//             console.error('Database query error:', err);
+//             res.status(500).json({ message: 'Database query error' });
+//         } else if (results.length > 0) {
+//             res.json({ VideoURL: results[0].VideoURL }); // Return the first matching result
+//         } else {
+//             console.log('No video found for title:', title); // Log when no result is found
+//             res.status(404).json({ message: 'Video not found' });
+//         }
+//     });
+// });
+
+router.get('/videos/:letter', async (req, res) => {
+    const letter = req.params.letter;
+    try {
+        const [rows] = await db.promise().query("SELECT VideoURL FROM BSL_Library WHERE Title = ?", [letter]);
+        if (rows.length > 0) {
+            res.json({ VideoURL: rows[0].VideoURL });
         } else {
-            console.log('No video found for title:', title); // Log when no result is found
-            res.status(404).json({ message: 'Video not found' });
+            res.status(404).json({ error: "No video found" + letter });
         }
-    });
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 module.exports = router;

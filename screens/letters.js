@@ -1,21 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
-import { StyleSheet, Button, ScrollView, Alert } from 'react-native';
+import React from 'react';
+import { StyleSheet, Button, ScrollView, Alert, View, Text } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import { findVideo } from '../api';
+import {Video} from 'expo-av';
+import { useNavigation } from '@react-navigation/native';
 
-const Letters = ({navigation}) => {
+const Letters = () => {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const [videoURL, setVideoURL] = React.useState('');
+    const navigation = useNavigation();
 
     //API for videos
     const handleVideo = async (letter) => {
-        const url = await findVideo(letter); //returns the url of the video
+        const url = await findVideo(letter); //finds the url of the video
         if (url) {
-            setVideoUrl(url); //this will update the url to the current letter pressed
-            console.log('Video found! letters.js')
+            setVideoURL(url); //this will update the url to the current letter pressed
+            console.log(`'Video found for ${letter}: `, url);
         } else {
-            setVideoUrl(url);
-            console.log('Video not found! letters.js')
+            setVideoURL(url);
+            console.log(`'Video not found for ${letter}`);
         }
     };
 
@@ -31,14 +35,23 @@ const Letters = ({navigation}) => {
                     navigation.navigate("launchScreen");
                 }}/>
             {alphabet.map((letter, index) => (
-                <Button title = {letter} 
-                    key = {index}
-                    onPress={() => {
-                        console.log(letter);
-                        Alert.alert(`You have pressed ${letter}`);
-;                    }}
-                />
+                <Button title = {letter} key = {index} onPress={() => handleVideo(letter)} />
             ))}
+
+            {/* Show the video if a URL is available */}
+            {videoURL && (
+                    <View style={styles.videoContainer}>
+                        <Text>Playing Video for Selected Letter:</Text>
+                        <Video 
+                            source={{ uri: videoURL}}
+                            style={styles.videoPlayer}
+                            controls={true}
+                            resizeMode="contain"
+                            onError={(e) => console.error('Video error: ', e)}
+                            onLoad={() => console.log('Video loaded successfully')}
+                        />
+                    </View>
+            )}
         </ScrollView>
         </SafeAreaView>
     );
@@ -58,6 +71,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderTopWidth: 1,
     borderTopColor: '#ddd',
+  },
+  videoPlayer: {
+    width: '100%',
+    height: '100%',
   },
 });
 

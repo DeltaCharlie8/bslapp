@@ -29,12 +29,16 @@ export const loginUser = async (userData) => {
 // BSL Video
 export const findVideo = async (letter) => {
     try {
-        const ltr = letter;
-        console.log('API called: trying to connect to routes.js with letter:', ltr);
-        const response = await axios.get(`${API_URL}/videos`, ltr);
-        return response.data.VideoURL
+        const response = await axios.get(`${API_URL}/videos/${letter}`);
+
+        if (response.data && response.data.VideoURL) {
+            return response.data.VideoURL;
+        } else {
+            console.error(`No video found for ${letter}`);
+            return null;
+        }
     } catch (error) {
-        console.error('Error finding video:', error.message);
-        throw error;
+        console.error("Error finding video:", error.response ? error.response.data : error.message);
+        return null;
     }
 };
