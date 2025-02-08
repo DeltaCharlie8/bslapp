@@ -1,21 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
-import { Button, ScrollView, SafeAreaView, StyleSheet, Alert } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Button, ScrollView, Alert } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import { findVideo } from '../api';
 
-const Letters = () => {
-    const [videoUrl, setVideoUrl] = useState(null);
+const Letters = ({navigation}) => {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
     //API for videos
     const handleVideo = async (letter) => {
-        console.log(`handleVideo called`);
         const url = await findVideo(letter); //returns the url of the video
         if (url) {
             setVideoUrl(url); //this will update the url to the current letter pressed
             console.log('Video found! letters.js')
         } else {
-            setVideoUrl(null);
+            setVideoUrl(url);
             console.log('Video not found! letters.js')
         }
     };
@@ -30,23 +29,16 @@ const Letters = () => {
                 onPress={() => {
                     Alert.alert('You have been logged out'); 
                     navigation.navigate("launchScreen");
-                }}
-            />
+                }}/>
             {alphabet.map((letter, index) => (
-                <Button 
-                key={index} 
-                title={letter}
-                onPress={() => handleVideo(letter) // Call handleVideo on button press
-                } 
+                <Button title = {letter} 
+                    key = {index}
+                    onPress={() => {
+                        console.log(letter);
+                        Alert.alert(`You have pressed ${letter}`);
+;                    }}
                 />
             ))}
-            {/*If the video is available it will display */} 
-            {videoUrl && (
-            <View style={styles.videoContainer}>
-                <Text>Video URL: {videoUrl}</Text>
-                {/* You can render a video player here */}
-            </View>
-            )}
         </ScrollView>
         </SafeAreaView>
     );
