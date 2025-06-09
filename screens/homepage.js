@@ -1,5 +1,4 @@
 import { StatusBar } from 'expo-status-bar';
-import * as React from 'react';
 import { StyleSheet, SafeAreaView, Button, Alert } from 'react-native';
 
 const Homepage = ({navigation}) => {

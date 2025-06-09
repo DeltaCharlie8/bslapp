@@ -11,6 +11,12 @@
     "owner": "delta_charlie",
     "plugins": [
       "expo-video"
-    ]
+    ],
+    "android": {
+      "newArchEnabled": true
+    },
+    "ios": {
+      "newArchEnabled": true
+    }
   }
 }
